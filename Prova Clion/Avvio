@@ -1,0 +1,56 @@
+
+
+
+ 
+int *giocatori;
+    bool *alive;
+    ProfiloGiocatore *giocatori_veri;
+
+    bool nuovo, prosegui;
+    int scelta;
+    char opzioni[2][10] = {"carica", "inserisci"};
+    char scelte[4][10] = {"continua", "salva", "inizia", "esci"};
+
+
+    // SCELTA DELL'OPERAZIONE DA SVOLGERE: INSERIRE UN PROFILO O CARICARE UNA PARTITA
+
+    //carica una partita o inserisci un nuovo profilo giocatore
+    //se inserisci il profilo, mettine un altro o salva / inizia / esci
+
+    nuovo = (bool)choice_string("\nCosa vuoi fare? (carica / inserisci)\n[Tu]: ", 2, opzioni);
+
+    if(nuovo) {
+
+        int numero_profili = 1;
+        giocatori_veri = (ProfiloGiocatore *) calloc(numero_profili, sizeof(ProfiloGiocatore));
+
+        do {
+            giocatori_veri = (ProfiloGiocatore *) realloc(giocatori_veri, sizeof(ProfiloGiocatore) * numero_profili);   // rivedere, fa un passaggio inutile
+
+            printf("\nNome: ");
+            scanf (" %[^\n]%*c", giocatori_veri[numero_profili - 1].nome);
+
+            prosegui = choice_string("\nScegli l'operazione: (continua / salva / inizia / esci)\n[Tu]: ", 4, scelte);
+
+            numero_profili++;
+
+        } while(prosegui == 0);
+
+        switch(prosegui) {
+            case 1:
+                // salva la partita in un file senza gioco
+                break;
+            case 2:
+                // inizia la partita
+                break;
+            case 3:
+                // esci dal gioco
+                break;
+            default:
+                printf("\nERRORE! Scelta non valida!\n");
+        }
+
+    } else {
+        // leggi il file dei file e fai scegliere
+        // boh
+    }
